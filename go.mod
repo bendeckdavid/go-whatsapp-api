@@ -2,9 +2,9 @@ module github.com/BendeckDev/go_whatsapp_api
 
 go 1.19
 
-replace github.com/BendeckDev/go_connector => ../go_connector
+replace github.com/BendeckDev/go-connector => ../go_connector
 
-require github.com/BendeckDev/go_connector v0.0.0-00010101000000-000000000000
+require github.com/BendeckDev/go-connector v0.0.0-00010101000000-000000000000
 
 require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect

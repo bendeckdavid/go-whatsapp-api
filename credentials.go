@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	conn "github.com/BendeckDev/go_connector"
+	conn "github.com/BendeckDev/go-connector"
 )
 
 type Credentials struct {
@@ -16,7 +16,9 @@ type Credentials struct {
 // Make a Request with the Instance
 func (cd Credentials) Request(req conn.Request) conn.Response {
 
-	(req.Type) = &conn.Get
+	if req.Type == nil {
+		req.Type = &conn.Get
+	}
 	req.Endpoint = fmt.Sprintf("https://graph.facebook.com/%v/%s%s", cd.Version, cd.PhoneID, req.Endpoint)
 	req.Headers = append(req.Headers, conn.Header{
 		Name:  "Authorization",

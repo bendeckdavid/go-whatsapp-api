@@ -1,10 +1,12 @@
 package whatsapp
 
-import conn "github.com/BendeckDev/go_connector"
+import conn "github.com/BendeckDev/go-connector"
 
 func buildRequest(r Request) conn.Request {
 
 	return conn.Request{
+		Endpoint: "/messages",
+		Type:     &conn.Post,
 		Body: struct {
 			Product   string           `json:"messaging_product"`
 			Recipient string           `json:"recipient_type"`
