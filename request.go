@@ -45,6 +45,9 @@ func (r *Request) Template(name string, vars ...string) *Request {
 	r.typeOf = "template"
 	r.template = &templateContent{
 		Name: name,
+		Language: struct {
+			Code string "json:\"code\""
+		}{Code: r.Lang},
 		Components: []struct {
 			Type       string             "json:\"type\""
 			Parameters []parameterContent "json:\"parameters\""
