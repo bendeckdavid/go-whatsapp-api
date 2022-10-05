@@ -1,5 +1,7 @@
 package whatsapp
 
+import conn "github.com/BendeckDev/go-connector"
+
 type Request struct {
 	To       string
 	Lang     string
@@ -8,7 +10,14 @@ type Request struct {
 	template *templateContent
 }
 
-func (r *Request) Text(text string) {
+func NewRequest(To string, Lang string) *Request {
+	return &Request{
+		To:   To,
+		Lang: Lang,
+	}
+}
+
+func (r *Request) Text(text string) *Request {
 
 	// Content
 	r.typeOf = "text"
@@ -16,9 +25,11 @@ func (r *Request) Text(text string) {
 		Preview: false,
 		Text:    text,
 	}
+
+	return r
 }
 
-func (r *Request) Template(name string, vars ...string) {
+func (r *Request) Template(name string, vars ...string) *Request {
 
 	var parameters []parameterContent
 
@@ -39,8 +50,10 @@ func (r *Request) Template(name string, vars ...string) {
 			Parameters []parameterContent "json:\"parameters\""
 		}{{Type: "body", Parameters: parameters}},
 	}
+
+	return r
 }
 
-func (r *Request) Send(cd Credentials) {
-	cd.Request(buildRequest(*r))
+func (r *Request) Send(cd Credentials) conn.Response {
+	return cd.Request(buildRequest(*r))
 }
