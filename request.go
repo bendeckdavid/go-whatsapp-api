@@ -3,18 +3,27 @@ package whatsapp
 import conn "github.com/BendeckDev/go-connector"
 
 type Request struct {
-	To       string
-	typeOf   string
-	text     *textContent
-	template *templateContent
+	To          string
+	credentials *Credentials
+	typeOf      string
+	text        *textContent
+	template    *templateContent
 }
 
+// Create new whatsapp request
 func NewRequest(To string) *Request {
 	return &Request{
 		To: To,
 	}
 }
 
+// Set custom credentials for a request
+func (r *Request) WithCredentials(cd *Credentials) *Request {
+	r.credentials = cd
+	return r
+}
+
+// Set text content for request
 func (r *Request) Text(text string) *Request {
 
 	// Content
@@ -27,6 +36,7 @@ func (r *Request) Text(text string) *Request {
 	return r
 }
 
+// Set template content for request
 func (r *Request) Template(name string, lang string, bodyVars ...string) *Request {
 
 	var parameters []parameterContent
@@ -55,6 +65,12 @@ func (r *Request) Template(name string, lang string, bodyVars ...string) *Reques
 	return r
 }
 
-func (r *Request) Send(cd Credentials) conn.Response {
-	return cd.Request(buildRequest(*r))
+// Make whatsapp request
+func (r *Request) Send() conn.Response {
+
+	if r.credentials == nil {
+		r.credentials = getCredentials()
+	}
+
+	return r.credentials.Request(buildRequest(*r))
 }

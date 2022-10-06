@@ -3,14 +3,31 @@ package whatsapp
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	conn "github.com/BendeckDev/go-connector"
 )
+
+var credentials *Credentials
 
 type Credentials struct {
 	PhoneID string
 	Token   string
 	Version string
+}
+
+// Read credentials from environment variables
+func getCredentials() *Credentials {
+
+	if credentials == nil {
+		credentials = Credentials{
+			PhoneID: os.Getenv("WSP_PHONE_ID"),
+			Token:   os.Getenv("WSP_TOKEN"),
+			Version: os.Getenv("WSP_VERSION"),
+		}.Validate()
+	}
+
+	return credentials
 }
 
 // Make a Request with the Instance
@@ -28,14 +45,19 @@ func (cd Credentials) Request(req conn.Request) conn.Response {
 	return req.Make()
 }
 
-// Validate credentials
-func (i Credentials) Validate() Credentials {
+// Save credentials to be used globally
+func (cd Credentials) Save() {
+	credentials = cd.Validate()
+}
 
-	if req := i.Request(conn.Request{
+// Validate credentials
+func (cd Credentials) Validate() *Credentials {
+
+	if req := cd.Request(conn.Request{
 		Endpoint: "/",
 	}); req.Status != http.StatusOK {
 		panic("invalid Whatsapp credentials")
 	}
 
-	return i
+	return &cd
 }
