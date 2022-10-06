@@ -2,10 +2,8 @@ module github.com/BendeckDev/go-whatsapp-api
 
 go 1.19
 
-replace github.com/BendeckDev/go-connector => ../go_connector
-
 require (
-	github.com/BendeckDev/go-connector v0.0.0-00010101000000-000000000000
+	github.com/BendeckDev/go-connector v0.2.0
 	github.com/labstack/echo/v4 v4.9.0
 )
 
