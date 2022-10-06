@@ -4,11 +4,13 @@ go 1.19
 
 replace github.com/BendeckDev/go-connector => ../go_connector
 
-require github.com/BendeckDev/go-connector v0.0.0-00010101000000-000000000000
+require (
+	github.com/BendeckDev/go-connector v0.0.0-00010101000000-000000000000
+	github.com/labstack/echo/v4 v4.9.0
+)
 
 require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
-	github.com/labstack/echo/v4 v4.9.0 // indirect
 	github.com/labstack/gommon v0.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
