@@ -1,4 +1,4 @@
-module github.com/BendeckDev/go_whatsapp_api
+module github.com/BendeckDev/go-whatsapp-api
 
 go 1.19
 
