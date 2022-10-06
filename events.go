@@ -1,6 +1,7 @@
 package whatsapp
 
 type Message struct {
+	From string
 	Text string
 }
 
