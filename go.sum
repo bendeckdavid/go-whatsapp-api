@@ -1,5 +1,5 @@
-github.com/BendeckDev/go-connector v0.2.2 h1:iWnL/vRa+ktIghfOmZx86KwdfIqd25waHavaLuQXPg8=
-github.com/BendeckDev/go-connector v0.2.2/go.mod h1:DDsLfaUQrU1nMBjR15N/tFIzzvB2k7hO9mYnIaGsQF4=
+github.com/BendeckDev/go-connector v0.3.0 h1:Mvsf062rdaOTMnjZA/netp10Cp0UahBKeJzh6Ubn8fw=
+github.com/BendeckDev/go-connector v0.3.0/go.mod h1:qoQsoVbjb7vbFuKIifU+zUCzgAfGFZK5LXpfvLosF4k=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
