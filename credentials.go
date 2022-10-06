@@ -11,9 +11,10 @@ import (
 var credentials *Credentials
 
 type Credentials struct {
-	PhoneID string
-	Token   string
-	Version string
+	BusinessID string
+	Token      string
+	PhoneID    string
+	Version    string
 }
 
 // Read credentials from environment variables
@@ -21,9 +22,10 @@ func getCredentials() *Credentials {
 
 	if credentials == nil {
 		credentials = Credentials{
-			PhoneID: os.Getenv("WSP_PHONE_ID"),
-			Token:   os.Getenv("WSP_TOKEN"),
-			Version: os.Getenv("WSP_VERSION"),
+			BusinessID: os.Getenv("WSP_BUSINESS_ID"),
+			Token:      os.Getenv("WSP_TOKEN"),
+			PhoneID:    os.Getenv("WSP_PHONE_ID"),
+			Version:    os.Getenv("WSP_VERSION"),
 		}.Validate()
 	}
 
@@ -36,7 +38,7 @@ func (cd Credentials) Request(req conn.Request) conn.Response {
 	if req.Type == nil {
 		req.Type = &conn.Get
 	}
-	req.Endpoint = fmt.Sprintf("https://graph.facebook.com/%v/%s%s", cd.Version, cd.PhoneID, req.Endpoint)
+	req.Endpoint = fmt.Sprintf("https://graph.facebook.com/%s/%s", cd.Version, req.Endpoint)
 	req.Headers = append(req.Headers, conn.Header{
 		Name:  "Authorization",
 		Value: "Bearer " + cd.Token,
@@ -54,9 +56,15 @@ func (cd Credentials) Save() {
 func (cd Credentials) Validate() *Credentials {
 
 	if req := cd.Request(conn.Request{
-		Endpoint: "/",
+		Endpoint: "/" + cd.BusinessID,
 	}); req.Status != http.StatusOK {
 		panic("invalid Whatsapp credentials")
+	}
+
+	if req := cd.Request(conn.Request{
+		Endpoint: "/" + cd.PhoneID,
+	}); req.Status != http.StatusOK {
+		panic("invalid phone number ID")
 	}
 
 	return &cd
