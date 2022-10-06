@@ -3,7 +3,7 @@ module github.com/BendeckDev/go-whatsapp-api
 go 1.18
 
 require (
-	github.com/BendeckDev/go-connector v0.2.1
+	github.com/BendeckDev/go-connector v0.2.2
 	github.com/labstack/echo/v4 v4.9.0
 )
 
