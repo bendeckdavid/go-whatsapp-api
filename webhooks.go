@@ -16,7 +16,7 @@ const ig = "Event ignored because "
 // Verification endpoint
 func verifyHook(e *echo.Echo) {
 
-	e.GET("/whatsapp/webhook", func(c echo.Context) error {
+	e.GET("/webhooks/whatsapp", func(c echo.Context) error {
 
 		var hook webhook
 		err := c.Bind(&hook)
@@ -47,7 +47,7 @@ func RegisterWebhook(s *conn.Server) *conn.Server {
 
 		for _, entry := range ev.Entry {
 
-			if entry.ID != getCredentials().BusinessID {
+			if entry.ID != credentials.BusinessID {
 				log.Println(ig + "BusinessID mismatch")
 				continue
 			}

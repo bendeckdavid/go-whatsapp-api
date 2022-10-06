@@ -69,7 +69,7 @@ func (r *Request) Template(name string, lang string, bodyVars ...string) *Reques
 func (r *Request) Send() conn.Response {
 
 	if r.credentials == nil {
-		r.credentials = getCredentials()
+		r.credentials = credentials
 	}
 
 	return r.credentials.Request(buildRequest(*r))

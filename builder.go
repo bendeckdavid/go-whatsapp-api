@@ -5,7 +5,7 @@ import conn "github.com/BendeckDev/go-connector"
 func buildRequest(r Request) conn.Request {
 
 	return conn.Request{
-		Endpoint: getCredentials().PhoneID + "/messages",
+		Endpoint: credentials.PhoneID + "/messages",
 		Type:     &conn.Post,
 		Body: struct {
 			Product   string           `json:"messaging_product"`
