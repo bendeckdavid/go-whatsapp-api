@@ -1,4 +1,4 @@
-package whatsapp
+package wsp
 
 type (
 	textContent struct {
