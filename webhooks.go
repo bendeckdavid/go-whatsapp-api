@@ -65,10 +65,15 @@ func RegisterWebhook(s *conn.Server) *conn.Server {
 				}
 
 				for _, msg := range change.Value.Messages {
-					go eventHandler.onNewMessage(Message{
+
+					msg := Message{
+						ID:   msg.ID,
 						From: msg.From,
 						Text: msg.Text.Body,
-					})
+					}
+
+					conn.DB.Create(&msg)
+					go eventHandler.onNewMessage(msg)
 				}
 
 			}
@@ -93,26 +98,18 @@ type event struct {
 		ID      string `json:"id"`
 		Changes []struct {
 			Value struct {
-				Product string `json:"messaging_product"`
-				Data    struct {
-					Number   string `json:"display_phone_number"`
-					NumberID string `json:"phone_number_id"`
-				} `json:"metadata"`
-				Contacts []struct {
-					Profile struct {
-						Name string `json:"name"`
-					} `json:"profile"`
-					WID string `json:"wa_id"`
-				} `json:"contacts"`
+				Product  string `json:"messaging_product"`
 				Messages []struct {
-					From      string `json:"from"`
-					ID        string `json:"id"`
-					Timestamp string `json:"timestamp"`
-					Text      struct {
+					From string `json:"from"`
+					ID   string `json:"id"`
+					Text struct {
 						Body string `json:"body"`
-					} `json:"text"`
-					Type string `json:"type"`
+					} `json:"text,omitempty"`
 				} `json:"messages"`
+				Statuses []struct {
+					ID     string `json:"id"`
+					Status string `json:"status"`
+				} `json:"statuses,omitempty"`
 			} `json:"value"`
 			Field string `json:"field"`
 		} `json:"changes"`
