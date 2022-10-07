@@ -1,4 +1,4 @@
-package whatsapp
+package wsp
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	conn "github.com/BendeckDev/go-connector"
+	conn "github.com/bendeckdavid/go-connector"
 	"github.com/labstack/echo/v4"
 )
 

@@ -1,6 +1,6 @@
-package whatsapp
+package wsp
 
-import conn "github.com/BendeckDev/go-connector"
+import conn "github.com/bendeckdavid/go-connector"
 
 type Request struct {
 	To          string

@@ -1,4 +1,4 @@
-package whatsapp
+package wsp
 
 type Message struct {
 	From string

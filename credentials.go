@@ -1,11 +1,11 @@
-package whatsapp
+package wsp
 
 import (
 	"fmt"
 	"net/http"
 	"os"
 
-	conn "github.com/BendeckDev/go-connector"
+	conn "github.com/bendeckdavid/go-connector"
 )
 
 var credentials *Credentials
