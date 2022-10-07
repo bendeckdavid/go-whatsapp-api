@@ -47,7 +47,7 @@ func RegisterWebhook(s *conn.Server) *conn.Server {
 
 		for _, entry := range ev.Entry {
 
-			if entry.ID != credentials.BusinessID {
+			if entry.ID != getCredentials().BusinessID {
 				log.Println(ig + "BusinessID mismatch")
 				continue
 			}
@@ -65,7 +65,7 @@ func RegisterWebhook(s *conn.Server) *conn.Server {
 				}
 
 				for _, msg := range change.Value.Messages {
-					eventHandler.onNewMessage(Message{
+					go eventHandler.onNewMessage(Message{
 						From: msg.From,
 						Text: msg.Text.Body,
 					})

@@ -66,11 +66,11 @@ func (r *Request) Template(name string, lang string, bodyVars ...string) *Reques
 }
 
 // Make whatsapp request
-func (r *Request) Send() conn.Response {
+func (r Request) Send() conn.Response {
 
 	if r.credentials == nil {
-		r.credentials = credentials
+		r.credentials = getCredentials()
 	}
 
-	return r.credentials.Request(buildRequest(*r))
+	return r.credentials.Request(buildRequest(r))
 }

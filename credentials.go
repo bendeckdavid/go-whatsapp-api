@@ -17,18 +17,18 @@ type Credentials struct {
 	Version    string
 }
 
-// Set global credentials
-func SetCredentials(cd *Credentials) {
-	if cd == nil {
+// Get global credentials
+func getCredentials() *Credentials {
+	if credentials == nil {
 		Credentials{
 			BusinessID: os.Getenv("WSP_BUSINESS_ID"),
 			Token:      os.Getenv("WSP_TOKEN"),
 			PhoneID:    os.Getenv("WSP_PHONE_ID"),
 			Version:    os.Getenv("WSP_VERSION"),
 		}.Save()
-	} else {
-		cd.Save()
 	}
+
+	return credentials
 }
 
 // Make a Request with the Instance
